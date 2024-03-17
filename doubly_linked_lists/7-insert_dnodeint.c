@@ -1,5 +1,20 @@
 #include "lists.h"
 
+dlistint_t *traverse_dlistint(dlistint_t **h, unsigned int idx)
+{
+	unsigned int i;
+	dlistint_t *current = *h;
+
+	for (i = 0; (i < idx - 1) && (idx != 0); i++)
+	{
+		if (current == NULL)
+		{
+			return (NULL);
+		}
+		current = current->next;
+	}
+	return (current);
+}
 /**
  * insert_dnodeint_at_index - Inserts a node at desired index
  *
@@ -18,42 +33,43 @@
 dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 {
 	dlistint_t *current = *h;
-	dlistint_t *newNode = NULL;
-	unsigned int i;
+	dlistint_t *new = NULL;
 
-	if (idx == 0)
-	{
-		*h = newNode;
-	}
-
-	for (i = 0; (i < idx) && current; i++)
-		current = current->next;
-
-	if (i > idx && !current)
+	if (h == NULL)
 		return (NULL);
-
-	newNode = malloc(sizeof(dlistint_t));
-
-	if (!newNode)
+	new = malloc(sizeof(dlistint_t));
+	if (!new)
 		return (NULL);
-
-	newNode->n = n;
-	newNode->next = NULL;
-	newNode->prev = NULL;
-
-	if (current)
+	new->n = n;
+	new->next = NULL;
+	new->prev = NULL;
+	if (*h == NULL)
 	{
-		newNode->next = current;
-		newNode->prev = current->prev;
-		if (current->prev)
+		if (idx != 0)
 		{
-			current->prev->next = newNode;
+			free(new);
+			return (NULL);
 		}
-		current->prev = newNode;
-	} else
-	{
-		*h = newNode;
+		*h = new;
+		return (new);
 	}
-
-	return (newNode);
+	current = traverse_dlistint(h, idx);
+	if (current == NULL)
+	{
+		free(new);
+		return (NULL);
+	}
+	if (idx != 0)
+	{
+		new->prev = current;
+		new->next = current->next;
+		if (current->next)
+			current->next->prev = new;
+		current->next = new;
+		return (new);
+	}
+	new->next = current;
+	current->prev = new;
+	*h = new;
+	return (new);
 }
