@@ -1,5 +1,14 @@
 #include "lists.h"
 
+/**
+ * traverse_dlistint - Traverses a doubly-linked list to a specified index
+ *
+ * @h: The list to be traversed
+ * @idx: The index to go to in the list
+ *
+ * Return: The node just before the specified index (or NULL if OOB)
+ */
+
 dlistint_t *traverse_dlistint(dlistint_t **h, unsigned int idx)
 {
 	unsigned int i;
@@ -15,6 +24,7 @@ dlistint_t *traverse_dlistint(dlistint_t **h, unsigned int idx)
 	}
 	return (current);
 }
+
 /**
  * insert_dnodeint_at_index - Inserts a node at desired index
  *
