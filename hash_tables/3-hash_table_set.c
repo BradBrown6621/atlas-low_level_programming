@@ -75,7 +75,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	if (!ht)
 		return (0);
 
-	if (is_collision(ht->array[index], key, value_cpy))
+	if (is_collision(ht->array[index], key, strdup(value)))
 		return (1);
 
 	newNode = malloc(sizeof(hash_node_t));
