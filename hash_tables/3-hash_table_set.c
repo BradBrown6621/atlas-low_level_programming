@@ -12,7 +12,7 @@ int is_collision(hash_node_t *beginning, const char *key, char *value)
 
 	while (current)
 	{
-		if (current->key == key)
+		if (!strcmp(current->key, key))
 		{
 			current->value = value;
 			return (1);
