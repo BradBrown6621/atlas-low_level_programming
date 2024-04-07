@@ -29,6 +29,9 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	char *value_cpy = malloc(strlen(value) + 1);
 	char *key_cpy = NULL;
 
+	if (!ht)
+		return (NULL);
+
 	if (!value_cpy)
 		return (0);
 
