@@ -69,11 +69,13 @@ int is_collision(hash_node_t *beginning, const char *key, char *value)
 
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
-	unsigned long int index = key_index((const unsigned char *)key, ht->size);
+	unsigned long int index;
 	hash_node_t *newNode = NULL;
 
 	if (!ht)
 		return (0);
+
+	index = key_index((const unsigned char *)key, ht->size);
 
 	if (is_collision(ht->array[index], key, strdup(value)))
 		return (1);
