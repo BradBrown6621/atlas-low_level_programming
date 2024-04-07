@@ -71,15 +71,17 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
 	unsigned long int index = key_index((const unsigned char *)key, ht->size);
 	hash_node_t *newNode = NULL;
-	char *value_cpy = malloc(strlen(value) + 1);
+	char *value_cpy = NULL;
 	char *key_cpy = NULL;
 
 	if (!ht)
 		return (0);
 
+	value_cpy = malloc(strlen(value) + 1);
 	if (!value_cpy)
+	{
 		return (0);
-
+	}
 	strcpy(value_cpy, value);
 
 	if (is_collision(ht->array[index], key, value_cpy))
@@ -94,6 +96,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		return (0);
 	}
 	strcpy(key_cpy, key);
+
 	newNode = malloc(sizeof(hash_node_t));
 	if (!newNode)
 	{
