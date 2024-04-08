@@ -3,12 +3,10 @@
 void hash_table_print(const hash_table_t *ht)
 {
 	unsigned long int i;
-
-	printf("===Checking if ht == NULL===\n");
+	int start = 1;
 
 	if (!ht)
 	{
-		printf("===Array is null===\n");
 		return;
 	}
 
@@ -16,8 +14,22 @@ void hash_table_print(const hash_table_t *ht)
 
 	for (i = 0; i < ((ht->size) - 1); i++)
 	{
-		printf("'%s': '%s', ", ht->array[i]->key, ht->array[i]->value);
+		if (ht->array[i])
+		{
+			if (start)
+			{
+				start = 0;
+			} else
+			{
+				printf(", ");
+			}
+			printf("'%s': '%s'", ht->array[i]->key, ht->array[i]->value);
+		}
 	}
 	i++;
-	printf("'%s': '%s'}", ht->array[i]->key, ht->array[i]->value);
+	if (ht->array[i])
+	{
+		printf(", '%s': '%s'", ht->array[i]->key, ht->array[i]->value);
+	}
+	printf("}\n");
 }
