@@ -26,7 +26,7 @@ void node_prepend(hash_node_t *node, hash_table_t *ht, unsigned long int index)
  * Return: 0 if no collisions reported, 1 if collisions
  */
 
-int is_collision(hash_node_t *beginning, const char *key, char *value)
+int is_collision(hash_node_t *beginning, const char *key, const char *value)
 {
 	hash_node_t *current = beginning;
 
@@ -34,7 +34,8 @@ int is_collision(hash_node_t *beginning, const char *key, char *value)
 	{
 		if (!strcmp(current->key, key))
 		{
-			current->value = value;
+			free(current->value);
+			current->value = strdup(value);
 			return (1);
 		}
 		current = current->next;
@@ -77,7 +78,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 
 	index = key_index((const unsigned char *)key, ht->size);
 
-	if (is_collision(ht->array[index], key, strdup(value)))
+	if (is_collision(ht->array[index], key, value))
 		return (1);
 
 	newNode = malloc(sizeof(hash_node_t));
