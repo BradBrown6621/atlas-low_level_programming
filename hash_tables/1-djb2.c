@@ -5,7 +5,7 @@
  *
  * @str: The string to be hashed
  *
- * Return: The hash number to be used for finding the index later in the program
+ * Return: The number used for finding a hash index
  */
 
 unsigned long int hash_djb2(const unsigned char *str)
