@@ -69,7 +69,6 @@ int binary_search(int arr[], size_t size, int value)
 		start = &(arr[mid]);
 		if (size % 2 == 1)
 		{
-			end++;
 			start++;
 		}
 		index += mid;
