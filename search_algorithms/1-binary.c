@@ -66,11 +66,12 @@ int binary_search(int arr[], size_t size, int value)
 		end--; /** delete this after you submit, checker was wrong*/
 	} else
 	{
+		start = &(arr[mid]);
 		if (size % 2 == 1)
 		{
 			end++;
+			start++;
 		}
-		start = &(arr[mid]);
 		index += mid;
 	}
 	result = binary_search(start, end, value);
