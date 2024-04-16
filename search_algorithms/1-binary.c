@@ -13,9 +13,11 @@ void print_array(int arr[], size_t size)
 {
 	size_t i;
 
-	for (i = 0; i < size; i++)
+	printf("Searching in array: %i", arr[0]);
+
+	for (i = 1; i < size; i++)
 	{
-		printf("%i ", arr[i]);
+		printf(", %i", arr[i]);
 	}
 	printf("\n");
 }
